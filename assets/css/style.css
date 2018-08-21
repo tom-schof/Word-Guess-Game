@@ -1,0 +1,28 @@
+body{
+   
+}
+
+@font-face {
+    font-family: TOP GUN;
+    src: url(./fonts/TOP\ GUN.ttf);
+}
+
+header{
+    position: relative;
+    margin: 15px;
+    font-family: TOP GUN;
+    background-image: url(../images/top-gun-logo.png);
+    /* background-attachment: fixed; */
+    height: 190px;
+    background-position: center;
+    text-align: center;
+   
+
+}
+h1{
+    position: absolute;
+    text-align: center;
+    color: #fe0000;
+    bottom: -25px;
+    left: 55%;
+}
