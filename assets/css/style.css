@@ -1,16 +1,16 @@
-body{
-   
-}
-
 @font-face {
     font-family: TOP GUN;
     src: url(./fonts/TOP\ GUN.ttf);
+}
+body{
+    font-family: TOP GUN;
+
 }
 
 header{
     position: relative;
     margin: 15px;
-    font-family: TOP GUN;
+   
     background-image: url(../images/top-gun-logo.png);
     /* background-attachment: fixed; */
     height: 190px;
@@ -22,7 +22,54 @@ header{
 h1{
     position: absolute;
     text-align: center;
-    color: #fe0000;
+    color: rgb(187,19,62);
     bottom: -25px;
     left: 55%;
+}
+
+.container{
+    position: relative;
+    background-color: rgb(0,33,71);
+    color: whitesmoke;
+    height: 550px;
+    border: 6px solid rgb(187,19,62);
+    margin: 0 auto;
+    overflow: auto;
+    padding: 25px;
+    text-align: center;
+
+}
+.img-col{
+    position: relative;
+    background-color: rgb(153,217,234);
+    left: 0;
+    height: 480px;
+}
+#f-16{
+    width: 300px;
+}
+#mig28{
+    position: absolute;
+    width: 275px;
+    bottom: 0;
+    left: 0;
+}
+
+.game-text{
+    position: absolute;
+    top: 16%;
+    left: 54%;
+}
+
+#footer{
+    position: absolute;
+    width: 100%;
+    background-color:  rgb(0,33,71);
+    border-top: 6px solid rgb(187,19,62);
+    font-size: 10pt;
+    padding: 20px;
+    margin-top: 50px;
+    text-align: center;
+    color: rgb(187,19,62);;
+    float:bottom;
 }
