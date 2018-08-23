@@ -52,6 +52,16 @@ audio{
     width: 300px;
     top: 30px;
 }
+#image{
+    position: absolute;
+    height: 220px;
+    width:300px;
+    bottom: 33%;
+    left:0;
+}
+#image-top{
+    font-size: 20pt;
+}
 #mig28{
     position: absolute;
     width: 275px;

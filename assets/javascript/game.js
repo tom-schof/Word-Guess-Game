@@ -3,7 +3,7 @@ var wordList = ["maverick", "goose", "iceman", "volleyball", "pilot", "navy", "c
     "fightertown usa", "take my breath away", "playing with the boys", "wingman", "take me to bed or lose me forever",
     "i feel the need - the need for speed", "i was inverted", "top gun anthem", "below the hard deck"];
 
-const maxGuesses = 8;
+const maxGuesses = 5;
 var guessedLetters = [];
 var currentWord = "";
 var wordBlanks = [];
@@ -42,8 +42,8 @@ function display() {
 // checks the player's guess
 function guessCheck(userGuess) {
     if (!guessedLetters.includes(userGuess)) {
-        console.log("guessedLetters:" + guessedLetters);
-        console.log("userGuess:" + userGuess);
+        // console.log("guessedLetters:" + guessedLetters);
+        // console.log("userGuess:" + userGuess);
         guessedLetters.push(userGuess);
 
         if (currentWord.includes(userGuess)) {
@@ -79,6 +79,8 @@ function reset() {
     document.getElementById("guessedLetters").innerHTML = guessedLetters;
     document.getElementById("remainingGuesses").innerHTML = remainingGuesses;
     document.getElementById("wins").innerHTML = wins;
+    // window.setTimeout(function(){document.getElementById("image").style.display = "none"}, 3000);
+    
     getNewWord();
     display();
 }
@@ -86,17 +88,22 @@ function reset() {
 function winner() {
     wins++;
     display();
-    alert("YOU...are still dangerous! You can be my wingman anytime!");
+    document.getElementById("winner").innerHTML = "YOU...are still dangerous! You can be my wingman anytime!";
+    // alert("YOU...are still dangerous! You can be my wingman anytime!");
     document.getElementById("image").src = "https://media.giphy.com/media/sSzCDRnOMaq3K/giphy.gif";
+    document.getElementById("image-top").innerHTML = "YOU WIN" ;
     reset();
 
 
 }
 
 function loser() {
-    alert("Goose is dead, Maverick. The correct word was " + currentWord);
+    // alert("Goose is dead, Maverick. The correct word was " + currentWord);
+    document.getElementById("loser").innerHTML = "Goose is dead, Maverick. The correct word was " + currentWord;
+    document.getElementById("image").src = "https://tinyurl.com/yalgetmr";
+    document.getElementById("image-top").innerHTML = "YOU LOSE" ;
     reset();
-    // document.getElementById("tailspin").src = "../images/goose-dead.jpeg";
+   
 
 }
 
