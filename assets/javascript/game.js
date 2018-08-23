@@ -11,44 +11,36 @@ var remainingGuesses = maxGuesses;
 var wins = 0;
 var remainingLetters = 0;
 
-
-
-
 // create an array of blanks out of the current word
 function getNewWord() {
     currentWord = wordList[Math.floor(Math.random() * wordList.length)];
-    console.log("currentWord: "+ currentWord);
+    console.log("currentWord: " + currentWord);
     for (var i = 0; i < currentWord.length; i++) {
         // console.log("currentWord[i]: "+ currentWord[i]);
-        
         if (currentWord[i] == ` `) {
             wordBlanks[i] = '&nbsp';
             // console.log("wordBlanks[i] (if): "+ wordBlanks);
-
         }
         else if (currentWord[i] == "'" || currentWord[i] == "-") {
             wordBlanks[i] = currentWord[i];
             // console.log("wordBlanks[i] (else if): "+ wordBlanks[i]);
-
         }
         else {
             wordBlanks[i] = "_";
-            // console.log("wordBlanks[i] (else): "+ wordBlanks[i]);
-            
+            // console.log("wordBlanks[i] (else): "+ wordBlanks[i]);  
         }
     }
     remainingLetters = currentWord.length;
 }
-
+// updates the display
 function display() {
     document.getElementById("wordBlanks").innerHTML = wordBlanks.join("&nbsp");
     document.getElementById("guessedLetters").innerHTML = guessedLetters;
     document.getElementById("remainingGuesses").innerHTML = remainingGuesses;
-
 }
-// if the player's guess is in the word, replace the blank with the letter
-function guessCheck(userGuess) {
 
+// checks the player's guess
+function guessCheck(userGuess) {
     if (!guessedLetters.includes(userGuess)) {
         console.log("guessedLetters:" + guessedLetters);
         console.log("userGuess:" + userGuess);
@@ -68,26 +60,18 @@ function guessCheck(userGuess) {
             }
         } else {
             remainingGuesses--;
-            
-             display();
+            display();
             if (remainingGuesses == 0) {
                 loser();
             }
         }
-
     }
     else {
         alert("Your ego is writing checks your alphabet can't cash! Enter a new letter!")
     }
-
-
-
 }
 
-
-
 function reset() {
-
     guessedLetters = [];
     currentWord = "";
     wordBlanks = [];
@@ -97,14 +81,13 @@ function reset() {
     document.getElementById("wins").innerHTML = wins;
     getNewWord();
     display();
-
 }
 
 function winner() {
     wins++;
     display();
     alert("YOU...are still dangerous! You can be my wingman anytime!");
-    // document.getElementById("high-five").src = "https://media.giphy.com/media/sSzCDRnOMaq3K/giphy.gif";
+    document.getElementById("image").src = "https://media.giphy.com/media/sSzCDRnOMaq3K/giphy.gif";
     reset();
 
 
@@ -118,23 +101,14 @@ function loser() {
 }
 
 document.onkeyup = function (event) {
-    // each time a player guesses a letter, decrease remaining guesses by one
     var userGuess = event.key;
-
-    // if (currentWord == "") {
-    //     getNewWord();
-    // }
-
     display();
     guessCheck(userGuess);
-
-
 }
 
 
 window.onload = function () {
     // document.getElementById("audio").autoplay;
     reset();
-
 }
 
