@@ -26,6 +26,11 @@ h1{
     bottom: -25px;
     left: 55%;
 }
+audio{
+    position: absolute;
+    bottom:-10px;
+    right: 0px;
+}
 
 .container{
     position: relative;
@@ -76,3 +81,4 @@ h1{
     color: rgb(187,19,62);;
     float:bottom;
 }
+

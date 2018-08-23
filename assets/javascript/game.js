@@ -68,6 +68,7 @@ function guessCheck(userGuess) {
             }
         } else {
             remainingGuesses--;
+            
              display();
             if (remainingGuesses == 0) {
                 loser();
@@ -132,6 +133,7 @@ document.onkeyup = function (event) {
 
 
 window.onload = function () {
+    // document.getElementById("audio").autoplay;
     reset();
 
 }
