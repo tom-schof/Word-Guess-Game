@@ -46,19 +46,22 @@ h1{
     height: 480px;
 }
 #f-16{
+    
     width: 300px;
+    top: 30px;
 }
 #mig28{
     position: absolute;
     width: 275px;
-    bottom: 0;
+    bottom: 30px;
     left: 0;
 }
 
 .game-text{
     position: absolute;
+    
     top: 16%;
-    left: 54%;
+    left: 48%;
 }
 
 #footer{

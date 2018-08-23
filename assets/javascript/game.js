@@ -12,70 +12,127 @@ var wins = 0;
 var remainingLetters = 0;
 
 
-document.onkeyup = function (event) {
-    // each time a player guesses a letter, decrease remaining guesses by one
-    var userGuess = event.key;
-    remainingGuesses--;
-    guessedLetters.push(userGuess);
 
-    // create an array of blanks out of the current word
-    function getNewWord() {
-        currentWord = Math.random(Math.floor(wordList.length - 1));
-        for (var i = 0; i < currentWord.length; i++) {
-            if (currentWord[i] != " " || currentWord[i] != "'") {
-                wordBlanks[i] = "_";
-            }
-            else {
-                wordBlanks[i] = currentWord[i];
-            }
+
+// create an array of blanks out of the current word
+function getNewWord() {
+    currentWord = wordList[Math.floor(Math.random() * wordList.length)];
+    console.log("currentWord: "+ currentWord);
+    for (var i = 0; i < currentWord.length; i++) {
+        // console.log("currentWord[i]: "+ currentWord[i]);
+        
+        if (currentWord[i] == ` `) {
+            wordBlanks[i] = '&nbsp';
+            // console.log("wordBlanks[i] (if): "+ wordBlanks);
+
         }
-        remainingLetters = currentWord.length;
+        else if (currentWord[i] == "'" || currentWord[i] == "-") {
+            wordBlanks[i] = currentWord[i];
+            // console.log("wordBlanks[i] (else if): "+ wordBlanks[i]);
+
+        }
+        else {
+            wordBlanks[i] = "_";
+            // console.log("wordBlanks[i] (else): "+ wordBlanks[i]);
+            
+        }
     }
-    // if the player's guess is in the word, replace the blank with the letter
-    function guessCheck() {
-        for (var i = 0; i < maxGuesses; i++) {
-            for (var j = 0; j < currentWord.length; j++) {
-                if (userGuess = currentWord[j]) {
-                    wordBlanks[j] = userGuess;
+    remainingLetters = currentWord.length;
+}
+
+function display() {
+    document.getElementById("wordBlanks").innerHTML = wordBlanks.join("&nbsp");
+    document.getElementById("guessedLetters").innerHTML = guessedLetters;
+    document.getElementById("remainingGuesses").innerHTML = remainingGuesses;
+
+}
+// if the player's guess is in the word, replace the blank with the letter
+function guessCheck(userGuess) {
+
+    if (!guessedLetters.includes(userGuess)) {
+        console.log("guessedLetters:" + guessedLetters);
+        console.log("userGuess:" + userGuess);
+        guessedLetters.push(userGuess);
+
+        if (currentWord.includes(userGuess)) {
+            for (var i = 0; i < currentWord.length; i++) {
+                if (currentWord[i] == userGuess) {
+                    wordBlanks[i] = userGuess;
+                    remainingLetters--;
+                    display();
+                    if (remainingLetters == 0) {
+                        winner();
+                        break;
+                    }
                 }
             }
-
+        } else {
+            remainingGuesses--;
+             display();
+            if (remainingGuesses == 0) {
+                loser();
+            }
         }
 
     }
-
-
-
-    function reset() {
-
-        guessedLetters = [];
-        currentWord = "";
-        wordBlanks = [];
-        remainingGuesses = maxGuesses;
-        document.getElementById("guessedLetters").innerHTML = guessedLetters;
-        document.getElementById("remainingGuesses").innerHTML = remainingGuesses;
-        document.getElementById("wins").innerHTML = wins;
-        getNewWord();
-
+    else {
+        alert("Your ego is writing checks your alphabet can't cash! Enter a new letter!")
     }
 
-    function winner() {
-        wins++;
-        document.getElementById("high-five").src = "../images/high-five.webp";
-        reset();
 
-
-    }
-
-    function loser() {
-        reset();
-        // document.getElementById("tailspin").src = "../images/tailspin.jpg";
-
-    }
 
 }
 
 
 
+function reset() {
 
+    guessedLetters = [];
+    currentWord = "";
+    wordBlanks = [];
+    remainingGuesses = maxGuesses;
+    document.getElementById("guessedLetters").innerHTML = guessedLetters;
+    document.getElementById("remainingGuesses").innerHTML = remainingGuesses;
+    document.getElementById("wins").innerHTML = wins;
+    getNewWord();
+    display();
+
+}
+
+function winner() {
+    wins++;
+    display();
+    alert("YOU...are still dangerous! You can be my wingman anytime!");
+    // document.getElementById("high-five").src = "https://media.giphy.com/media/sSzCDRnOMaq3K/giphy.gif";
+    reset();
+
+
+}
+
+function loser() {
+    alert("Goose is dead, Maverick. The correct word was " + currentWord);
+    reset();
+    // document.getElementById("tailspin").src = "../images/goose-dead.jpeg";
+
+}
+
+document.onkeyup = function (event) {
+    // each time a player guesses a letter, decrease remaining guesses by one
+    var userGuess = event.key;
+
+    // if (currentWord == "") {
+    //     getNewWord();
+    // }
+
+    display();
+    guessCheck(userGuess);
+
+
+}
+
+
+window.onload = function () {
+    reset();
+
+}
 
