@@ -111,6 +111,8 @@ function winner() {
 function loser() {
     document.getElementById("loser").innerHTML = "Goose is dead, Maverick. The correct phrase was " + currentWord;
     document.getElementById("image").src = "https://tinyurl.com/yalgetmr";
+    var img = document.getElementById("image");
+    img.style.visibility = 'visible';
     document.getElementById("image-top").innerHTML = "YOU LOSE" ;
     reset();
    
