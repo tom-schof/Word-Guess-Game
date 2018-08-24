@@ -1,7 +1,7 @@
-var wordList = ["maverick", "goose", "iceman", "volleyball", "pilot", "navy", "cold war", "kenny loggins",
+var wordList = ["maverick", "goose", "iceman", "volleyball", "pilot", "navy", "she's lost that loving feeling", "kenny loggins",
     "danger zone", "charlie", "viper", "jester", "cougar", "wolfman", "slider", "merlin", "sundown", "hollywood",
     "fightertown usa", "take my breath away", "playing with the boys", "wingman", "take me to bed or lose me forever",
-    "i feel the need - the need for speed", "i was inverted", "top gun anthem", "below the hard deck"];
+    "i feel the need - the need for speed", "i was inverted", "top gun anthem", "below the hard deck", "penny benjamin", "buzz the tower"];
 
 const maxGuesses = 5;
 var guessedLetters = [];
@@ -45,33 +45,35 @@ function display() {
 // checks the player's guess
 function guessCheck(userGuess) {
     resetWinLose();
-    if (!guessedLetters.includes(userGuess) || !userGuess == " " || !userGuess == "'" || !userGuess == "-") {
-        // console.log("guessedLetters:" + guessedLetters);
-        // console.log("userGuess:" + userGuess);
-        guessedLetters.push(userGuess);
+    if (!guessedLetters.includes(userGuess)) {
+        if (userGuess == " " || userGuess == "'" || userGuess == "-") {
+            alert("Your ego is writing checks your alphabet can't cash! Enter a new letter!");
+        } else {
+            guessedLetters.push(userGuess);
 
-        if (currentWord.includes(userGuess)) {
-            for (var i = 0; i < currentWord.length; i++) {
-                if (currentWord[i] == userGuess) {
-                    wordBlanks[i] = userGuess;
-                    remainingLetters--;
-                    display();
-                    if (remainingLetters == 0) {
-                        winner();
-                        break;
+            if (currentWord.includes(userGuess)) {
+                for (var i = 0; i < currentWord.length; i++) {
+                    if (currentWord[i] == userGuess) {
+                        wordBlanks[i] = userGuess;
+                        remainingLetters--;
+                        display();
+                        if (remainingLetters == 0) {
+                            winner();
+                            break;
+                        }
                     }
                 }
-            }
-        } else {
-            remainingGuesses--;
-            display();
-            if (remainingGuesses == 0) {
-                loser();
+            } else {
+                remainingGuesses--;
+                display();
+                if (remainingGuesses == 0) {
+                    loser();
+                }
             }
         }
     }
     else {
-        alert("Your ego is writing checks your alphabet can't cash! Enter a new letter!")
+        alert("Your ego is writing checks your alphabet can't cash! Enter a new letter!");
     }
 }
 
@@ -88,10 +90,10 @@ function reset() {
     display();
 }
 
-function resetWinLose(){
+function resetWinLose() {
     document.getElementById("loser").innerHTML = "";
     document.getElementById("winner").innerHTML = "";
-    document.getElementById("image-top").innerHTML = "" ;
+    document.getElementById("image-top").innerHTML = "";
     var img = document.getElementById("image");
     img.style.visibility = 'hidden';
 }
@@ -102,7 +104,7 @@ function winner() {
     document.getElementById("image").src = "https://media.giphy.com/media/sSzCDRnOMaq3K/giphy.gif";
     var img = document.getElementById("image");
     img.style.visibility = 'visible';
-    document.getElementById("image-top").innerHTML = "YOU WIN" ;
+    document.getElementById("image-top").innerHTML = "YOU WIN";
     reset();
 
 
@@ -113,9 +115,9 @@ function loser() {
     document.getElementById("image").src = "https://tinyurl.com/yalgetmr";
     var img = document.getElementById("image");
     img.style.visibility = 'visible';
-    document.getElementById("image-top").innerHTML = "YOU LOSE" ;
+    document.getElementById("image-top").innerHTML = "YOU LOSE";
     reset();
-   
+
 
 }
 
@@ -123,7 +125,7 @@ document.onkeyup = function (event) {
     var userGuess = event.key;
     display();
     guessCheck(userGuess);
-    
+
 }
 
 
