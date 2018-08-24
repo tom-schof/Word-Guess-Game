@@ -13,16 +13,19 @@ var remainingLetters = 0;
 
 // create an array of blanks out of the current word
 function getNewWord() {
+    var otherCharacters = 0;
     currentWord = wordList[Math.floor(Math.random() * wordList.length)];
     console.log("currentWord: " + currentWord);
     for (var i = 0; i < currentWord.length; i++) {
         // console.log("currentWord[i]: "+ currentWord[i]);
         if (currentWord[i] == ` `) {
+            otherCharacters++
             wordBlanks[i] = '&nbsp';
             // console.log("wordBlanks[i] (if): "+ wordBlanks);
         }
         else if (currentWord[i] == "'" || currentWord[i] == "-") {
             wordBlanks[i] = currentWord[i];
+            otherCharacters++;
             // console.log("wordBlanks[i] (else if): "+ wordBlanks[i]);
         }
         else {
@@ -30,7 +33,7 @@ function getNewWord() {
             // console.log("wordBlanks[i] (else): "+ wordBlanks[i]);  
         }
     }
-    remainingLetters = currentWord.length;
+    remainingLetters = currentWord.length - otherCharacters;
 }
 // updates the display
 function display() {
@@ -41,7 +44,8 @@ function display() {
 
 // checks the player's guess
 function guessCheck(userGuess) {
-    if (!guessedLetters.includes(userGuess)) {
+    resetWinLose();
+    if (!guessedLetters.includes(userGuess) || !userGuess == " " || !userGuess == "'" || !userGuess == "-") {
         // console.log("guessedLetters:" + guessedLetters);
         // console.log("userGuess:" + userGuess);
         guessedLetters.push(userGuess);
@@ -80,17 +84,24 @@ function reset() {
     document.getElementById("remainingGuesses").innerHTML = remainingGuesses;
     document.getElementById("wins").innerHTML = wins;
     // window.setTimeout(function(){document.getElementById("image").style.display = "none"}, 3000);
-    
     getNewWord();
     display();
 }
 
+function resetWinLose(){
+    document.getElementById("loser").innerHTML = "";
+    document.getElementById("winner").innerHTML = "";
+    document.getElementById("image-top").innerHTML = "" ;
+    var img = document.getElementById("image");
+    img.style.visibility = 'hidden';
+}
+
 function winner() {
     wins++;
-    display();
     document.getElementById("winner").innerHTML = "YOU...are still dangerous! You can be my wingman anytime!";
-    // alert("YOU...are still dangerous! You can be my wingman anytime!");
     document.getElementById("image").src = "https://media.giphy.com/media/sSzCDRnOMaq3K/giphy.gif";
+    var img = document.getElementById("image");
+    img.style.visibility = 'visible';
     document.getElementById("image-top").innerHTML = "YOU WIN" ;
     reset();
 
@@ -98,8 +109,7 @@ function winner() {
 }
 
 function loser() {
-    // alert("Goose is dead, Maverick. The correct word was " + currentWord);
-    document.getElementById("loser").innerHTML = "Goose is dead, Maverick. The correct word was " + currentWord;
+    document.getElementById("loser").innerHTML = "Goose is dead, Maverick. The correct phrase was " + currentWord;
     document.getElementById("image").src = "https://tinyurl.com/yalgetmr";
     document.getElementById("image-top").innerHTML = "YOU LOSE" ;
     reset();
@@ -111,11 +121,11 @@ document.onkeyup = function (event) {
     var userGuess = event.key;
     display();
     guessCheck(userGuess);
+    
 }
 
 
 window.onload = function () {
-    // document.getElementById("audio").autoplay;
     reset();
 }
 
