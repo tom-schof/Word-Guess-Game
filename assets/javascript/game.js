@@ -13,8 +13,10 @@ var remainingLetters = 0;
 
 // create an array of blanks out of the current word
 function getNewWord() {
+    var milliseconds = new Date().getMilliseconds();
+     
     var otherCharacters = 0;
-    currentWord = wordList[Math.floor(Math.random() * wordList.length)];
+    currentWord = wordList[Math.floor(milliseconds * wordList.length / 1000)];
     console.log("currentWord: " + currentWord);
     for (var i = 0; i < currentWord.length; i++) {
         // console.log("currentWord[i]: "+ currentWord[i]);
