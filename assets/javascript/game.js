@@ -48,6 +48,10 @@ function guessCheck(userGuess) {
     if (!guessedLetters.includes(userGuess)) {
         if (userGuess == " " || userGuess == "'" || userGuess == "-") {
             alert("Your ego is writing checks your alphabet can't cash! Enter a new letter!");
+
+        } else if (!"abcdefghijklmnopqrstuvwxyz".includes(userGuess)) {
+            alert("Your ego is writing checks your alphabet can't cash! Enter a new letter!");
+
         } else {
             guessedLetters.push(userGuess);
 
@@ -127,7 +131,6 @@ document.onkeyup = function (event) {
     guessCheck(userGuess);
 
 }
-
 
 window.onload = function () {
     reset();
